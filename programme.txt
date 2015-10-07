@@ -2,8 +2,16 @@
 # Les lignes de commentaires commencent par #
 procedure principale()
   i = 12+3;
+  j = 0;
   si (i>14)
     j=1;
   finsi
+
+  tantque (j<5) 
+    j=j+1;
+  fintantque
+
+  repeter j=j+1;
+  jusqua (j<20)
 finproc
 # Commentaire Final
