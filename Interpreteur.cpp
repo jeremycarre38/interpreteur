@@ -56,14 +56,14 @@ Noeud* Interpreteur::seqInst() {
   NoeudSeqInst* sequence = new NoeudSeqInst();
   do {
     sequence->ajoute(inst());
-  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole()=="tantque" || m_lecteur.getSymbole()=="repeter");
+  } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole()=="tantque" || m_lecteur.getSymbole()=="repeter" || m_lecteur.getSymbole()=="pour");
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
   return sequence;
 }
 
 Noeud* Interpreteur::inst() {
-  // <inst> ::= <affectation>  ; | <instSi>
+  // <inst> ::= <affectation>  ; | <instSi> | <instTantQue> | <instRepeter> | <instPour>
   if (m_lecteur.getSymbole() == "<VARIABLE>") {
     Noeud *affect = affectation();
     testerEtAvancer(";");
@@ -76,6 +76,8 @@ Noeud* Interpreteur::inst() {
       return instTantQue();
   else if (m_lecteur.getSymbole() == "repeter")
       return instRepeter();
+  else if (m_lecteur.getSymbole() == "pour")
+      return instPour();
   else erreur("Instruction incorrecte");
 }
 
@@ -165,4 +167,24 @@ Noeud*  Interpreteur::instRepeter() {
     //return nullptr;
 } 
 
-
+Noeud*  Interpreteur::instPour() {
+    // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
+    testerEtAvancer("pour");
+    testerEtAvancer("(");
+    Noeud* var = nullptr;
+    if (m_lecteur.getSymbole()=="<VARIABLE>") {
+        Noeud* var = affectation();
+    }
+    testerEtAvancer(";");
+    Noeud* condition = expression();
+    testerEtAvancer(";");
+    Noeud* compt = nullptr;
+    if (m_lecteur.getSymbole()=="<VARIABLE>") {
+        Noeud* compt = affectation();
+    }
+    testerEtAvancer(")");
+    Noeud* sequence = seqInst();
+    testerEtAvancer("finpour");
+    return new NoeudInstPour(var,condition,compt,sequence);
+    //return nullptr;
+}

@@ -3,6 +3,8 @@
 procedure principale()
   i = 12+3;
   j = 0;
+  h=1;
+
   si (i>14)
     j=1;
   finsi
@@ -13,5 +15,10 @@ procedure principale()
 
   repeter j=j+1;
   jusqua (j<20)
+
+  pour (h=1;h<5;h=h+1)
+  j=j-1;
+  finpour
+    
 finproc
 # Commentaire Final

@@ -111,4 +111,21 @@ class NoeudInstRepeter : public Noeud {
     Noeud*  m_sequence;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstPour : public Noeud {
+// Classe pour représenter un noeud "instruction pour"
+//  et ses 4 fils : la variable, la condition, l'incrémenteur  et la séquence d'instruction associée
+  public:
+    NoeudInstPour(Noeud* variable, Noeud* condition, Noeud* increment, Noeud* sequence);
+     // Construit une "instruction pour" avec sa variable, sa condition, son incrementeur et sa séquence d'instruction
+   ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction repeter : on affecte la variable (ou non) et on répète la séquence en incrémentant tant que la condition n'est pas remplis
+
+  private:
+    Noeud*  m_variable;
+    Noeud*  m_condition;
+    Noeud*  m_incrementeur;
+    Noeud*  m_sequence;
+};
+
 #endif /* ARBREABSTRAIT_H */
