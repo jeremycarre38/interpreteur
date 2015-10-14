@@ -20,7 +20,8 @@ procedure principale()
   #j=j-1;
   #finpour
 
-  ecrire("j=",j)
+  ecrire("j=",j,"ghhuegbkhtvb",j,"blabla","la",h)
+ lire(j , i)
     
 finproc
 # Commentaire Final

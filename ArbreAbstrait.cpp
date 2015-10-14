@@ -3,6 +3,7 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include "TableSymboles.h"
 #include <typeinfo>
 #include <vector>
 
@@ -149,6 +150,23 @@ int NoeudInstEcrire::executer() {
         } else {
             cout << ptr->executer();
         }
+    }
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstLire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstLire::NoeudInstLire(vector<Noeud*> expression)
+:m_expression(expression) {
+}
+
+int NoeudInstLire::executer() {
+    for (Noeud* ptr : m_expression) {
+        int temp=0;
+        cin >> temp;
+        ((SymboleValue*)ptr)->setValeur(temp);
     }
   return 0; // La valeur renvoyée ne représente rien !
 }

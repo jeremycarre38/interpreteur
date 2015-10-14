@@ -142,4 +142,18 @@ class NoeudInstEcrire : public Noeud {
     vector<Noeud*>  m_expression;
 };
 
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstLire : public Noeud {
+// Classe pour représenter un noeud "instruction lire"
+//  et son fils : l'expression associée
+  public:
+    NoeudInstLire(vector<Noeud*> expression);
+     // Construit une "instruction lire" avec son expression
+   ~NoeudInstLire() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction ecrire : on inscrit le contenu du clavier dans la variable passé en paramètre
+
+  private:
+    vector<Noeud*>  m_expression;
+};
+
 #endif /* ARBREABSTRAIT_H */
