@@ -119,17 +119,8 @@ NoeudInstPour::NoeudInstPour(Noeud* variable, Noeud* condition, Noeud* increment
 }
 
 int NoeudInstPour::executer() {
-    int var=0;
-    if (m_variable!=nullptr) {
-        var = m_variable->executer();
-    }
     
-    int compt=var+1;
-    if (m_incrementeur!=nullptr) {
-        compt = m_variable->executer();
-    }
-    
-    for (var;m_condition->executer();compt) {
+    for (m_variable->executer();m_condition->executer();m_incrementeur->executer()) {
         m_sequence->executer();
     }
   return 0; // La valeur renvoyée ne représente rien !

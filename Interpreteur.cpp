@@ -175,17 +175,11 @@ Noeud* Interpreteur::instPour() {
     // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
     testerEtAvancer("pour");
     testerEtAvancer("(");
-    Noeud* var = nullptr;
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        var = affectation();
-    }
+    Noeud* var = affectation();
     testerEtAvancer(";");
     Noeud* condition = expression();
     testerEtAvancer(";");
-    Noeud* compt = nullptr;
-    if (m_lecteur.getSymbole() == "<VARIABLE>") {
-        compt = affectation();
-    }
+    Noeud* compt = affectation();
     testerEtAvancer(")");
     Noeud* sequence = seqInst();
     testerEtAvancer("finpour");
