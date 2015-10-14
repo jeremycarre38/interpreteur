@@ -16,9 +16,11 @@ procedure principale()
   repeter j=j+1;
   jusqua (j<20)
 
-  pour (h=1;h<5;h=h+1)
-  j=j-1;
-  finpour
+  #pour (h=1;h<5;h=h+1)
+  #j=j-1;
+  #finpour
+
+  ecrire("j=",j)
     
 finproc
 # Commentaire Final

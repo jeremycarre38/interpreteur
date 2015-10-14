@@ -3,6 +3,8 @@
 #include "Symbole.h"
 #include "SymboleValue.h"
 #include "Exceptions.h"
+#include <typeinfo>
+#include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudSeqInst
@@ -128,6 +130,25 @@ int NoeudInstPour::executer() {
     
     for (var;m_condition->executer();compt) {
         m_sequence->executer();
+    }
+  return 0; // La valeur renvoyée ne représente rien !
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstEcrire
+////////////////////////////////////////////////////////////////////////////////
+
+NoeudInstEcrire::NoeudInstEcrire(vector<Noeud*> expression)
+:m_expression(expression) {
+}
+
+int NoeudInstEcrire::executer() {
+    for (Noeud* ptr : m_expression) {
+        if ( (typeid(*ptr)==typeid(SymboleValue) &&  *((SymboleValue*)ptr)== "<CHAINE>" )) {
+            cout << ((SymboleValue*) ptr)->getChaine();
+        } else {
+            cout << ptr->executer();
+        }
     }
   return 0; // La valeur renvoyée ne représente rien !
 }

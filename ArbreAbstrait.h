@@ -119,13 +119,27 @@ class NoeudInstPour : public Noeud {
     NoeudInstPour(Noeud* variable, Noeud* condition, Noeud* increment, Noeud* sequence);
      // Construit une "instruction pour" avec sa variable, sa condition, son incrementeur et sa séquence d'instruction
    ~NoeudInstPour() {} // A cause du destructeur virtuel de la classe Noeud
-    int executer();  // Exécute l'instruction repeter : on affecte la variable (ou non) et on répète la séquence en incrémentant tant que la condition n'est pas remplis
+    int executer();  // Exécute l'instruction pour //: on affecte la variable (ou non) et on répète la séquence en incrémentant tant que la condition n'est pas remplis
 
   private:
     Noeud*  m_variable;
     Noeud*  m_condition;
     Noeud*  m_incrementeur;
     Noeud*  m_sequence;
+};
+
+////////////////////////////////////////////////////////////////////////////////
+class NoeudInstEcrire : public Noeud {
+// Classe pour représenter un noeud "instruction ecrire"
+//  et son fils : l'expression associée
+  public:
+    NoeudInstEcrire(vector<Noeud*> expression);
+     // Construit une "instruction ecrire" avec son expression
+   ~NoeudInstEcrire() {} // A cause du destructeur virtuel de la classe Noeud
+    int executer();  // Exécute l'instruction ecrire : on ecrit le contenu de la variable associé 
+
+  private:
+    vector<Noeud*>  m_expression;
 };
 
 #endif /* ARBREABSTRAIT_H */

@@ -37,6 +37,7 @@ private:
     Noeud*  instTantQue(); // <instTantQue> ::= tantque ( <expression> ) <seqInst> fintantque 
     Noeud*  instRepeter(); // <instRepeter> ::= repeter <seqInst> jusqua ( <expression> )
     Noeud*  instPour(); // <instPour> ::= pour ( [ <affectation> ] ; <expression> ; [ <affectation> ] ) <seqInst> finpour
+    Noeud*  instEcrire(); // <instEcrire> ::= ecrire ( <expression> | <chaine> { , <expression> | <chaine> } )
 
     
     // outils pour simplifier l'analyse syntaxique
