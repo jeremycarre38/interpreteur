@@ -3,8 +3,9 @@
 procedure principale()
   i = 12+3;
   j = 0;
+  j = 0;
   h=1;
-
+    
   si (i>14)
     j=1;
   finsi

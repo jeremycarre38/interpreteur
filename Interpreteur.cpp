@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <sstream> 
 using namespace std;
 
 Interpreteur::Interpreteur(ifstream & fichier) :
@@ -14,19 +15,28 @@ void Interpreteur::analyse() {
 
 void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeException) {
     // Teste si le symbole courant est égal au symboleAttendu... Si non, lève une exception
-    static char messageWhat[256];
+    stringstream  messageWhat;
     if (m_lecteur.getSymbole() != symboleAttendu) {
-        sprintf(messageWhat,
-                "Ligne %d, Colonne %d - Erreur de syntaxe - Symbole attendu : %s - Symbole trouvé : %s",
-                m_lecteur.getLigne(), m_lecteur.getColonne(),
-                symboleAttendu.c_str(), m_lecteur.getSymbole().getChaine().c_str());
-        throw SyntaxeException(messageWhat);
+        messageWhat << "Ligne" << m_lecteur.getLigne() <<", Colonne"<< m_lecteur.getColonne() <<" - Erreur de syntaxe - Symbole attendu : "
+                    << symboleAttendu.c_str() << " - Symbole trouvé : "<<m_lecteur.getSymbole().getChaine().c_str();
+        
+        char* msgC;
+        string msg=messageWhat.str();
+        msgC = (char*)msg.c_str();
+        
+        throw SyntaxeException(msgC);
     }
 }
 
 void Interpreteur::testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException) {
     // Teste si le symbole courant est égal au symboleAttendu... Si oui, avance, Sinon, lève une exception
-    tester(symboleAttendu);
+    try {
+        tester(symboleAttendu);
+    } catch (SyntaxeException e) {
+        m_exception.push_back(e);
+    }
+
+
     m_lecteur.avancer();
 }
 
@@ -57,7 +67,13 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || m_lecteur.getSymbole() == "si" || m_lecteur.getSymbole() == "tantque" || m_lecteur.getSymbole() == "repeter" || m_lecteur.getSymbole() == "pour" || m_lecteur.getSymbole() == "ecrire" || m_lecteur.getSymbole() == "lire");
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" || 
+            m_lecteur.getSymbole() == "si" || 
+            m_lecteur.getSymbole() == "tantque" || 
+            m_lecteur.getSymbole() == "repeter" || 
+            m_lecteur.getSymbole() == "pour" || 
+            m_lecteur.getSymbole() == "ecrire" || 
+            m_lecteur.getSymbole() == "lire");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
     return sequence;
@@ -82,7 +98,7 @@ Noeud* Interpreteur::inst() {
         return instEcrire();
     else if (m_lecteur.getSymbole() == "lire")
         return instLire();
-    else erreur("Instruction incorrecte");
+    else cout << "instruction non trouvé";erreur("Instruction incorrecte");
 }
 
 Noeud* Interpreteur::affectation() {
@@ -199,7 +215,7 @@ Noeud* Interpreteur::instEcrire() {
     } else {
         contenu.push_back(expression());
     }
-    
+
 
     while (m_lecteur.getSymbole() == ",") {
         m_lecteur.avancer();
@@ -209,7 +225,7 @@ Noeud* Interpreteur::instEcrire() {
         } else {
             contenu.push_back(expression());
         }
-        
+
     }
 
     testerEtAvancer(")");
@@ -218,25 +234,35 @@ Noeud* Interpreteur::instEcrire() {
     //return nullptr;
 }
 
-Noeud*  Interpreteur::instLire() {
+Noeud* Interpreteur::instLire() {
     // <instLire> ::= lire ( <variable> {, <variable> })
     vector<Noeud*> contenu;
-    
+
     testerEtAvancer("lire");
     testerEtAvancer("(");
-    
+
     contenu.push_back(m_table.chercheAjoute(m_lecteur.getSymbole()));
-    
+
     m_lecteur.avancer();
-    
+
     while (m_lecteur.getSymbole() == ",") {
         m_lecteur.avancer();
         contenu.push_back(m_table.chercheAjoute(m_lecteur.getSymbole()));
         m_lecteur.avancer();
     }
-    
+
     testerEtAvancer(")");
-    
+
     return new NoeudInstLire(contenu);
     //return nullptr;
 } 
+
+bool Interpreteur::sansErreur() {
+    return m_exception.empty();
+}
+
+void Interpreteur::afficherErreur() {
+    for (auto e : m_exception) {
+        cout<<e.what()<<endl;
+    }
+}
