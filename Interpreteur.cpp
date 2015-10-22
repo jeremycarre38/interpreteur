@@ -15,15 +15,15 @@ void Interpreteur::analyse() {
 
 void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeException) {
     // Teste si le symbole courant est égal au symboleAttendu... Si non, lève une exception
-    stringstream  messageWhat;
+    stringstream messageWhat;
     if (m_lecteur.getSymbole() != symboleAttendu) {
-        messageWhat << "Ligne" << m_lecteur.getLigne() <<", Colonne"<< m_lecteur.getColonne() <<" - Erreur de syntaxe - Symbole attendu : "
-                    << symboleAttendu.c_str() << " - Symbole trouvé : "<<m_lecteur.getSymbole().getChaine().c_str();
-        
+        messageWhat << "Ligne" << m_lecteur.getLigne() << ", Colonne" << m_lecteur.getColonne() << " - Erreur de syntaxe - Symbole attendu : "
+                << symboleAttendu.c_str() << " - Symbole trouvé : " << m_lecteur.getSymbole().getChaine().c_str();
+
         char* msgC;
-        string msg=messageWhat.str();
-        msgC = (char*)msg.c_str();
-        
+        string msg = messageWhat.str();
+        msgC = (char*) msg.c_str();
+
         throw SyntaxeException(msgC);
     }
 }
@@ -67,12 +67,12 @@ Noeud* Interpreteur::seqInst() {
     NoeudSeqInst* sequence = new NoeudSeqInst();
     do {
         sequence->ajoute(inst());
-    } while (m_lecteur.getSymbole() == "<VARIABLE>" || 
-            m_lecteur.getSymbole() == "si" || 
-            m_lecteur.getSymbole() == "tantque" || 
-            m_lecteur.getSymbole() == "repeter" || 
-            m_lecteur.getSymbole() == "pour" || 
-            m_lecteur.getSymbole() == "ecrire" || 
+    } while (m_lecteur.getSymbole() == "<VARIABLE>" ||
+            m_lecteur.getSymbole() == "si" ||
+            m_lecteur.getSymbole() == "tantque" ||
+            m_lecteur.getSymbole() == "repeter" ||
+            m_lecteur.getSymbole() == "pour" ||
+            m_lecteur.getSymbole() == "ecrire" ||
             m_lecteur.getSymbole() == "lire");
     // Tant que le symbole courant est un début possible d'instruction...
     // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -98,7 +98,8 @@ Noeud* Interpreteur::inst() {
         return instEcrire();
     else if (m_lecteur.getSymbole() == "lire")
         return instLire();
-    else cout << "instruction non trouvé";erreur("Instruction incorrecte");
+    else cout << "instruction non trouvé";
+    erreur("Instruction incorrecte");
 }
 
 Noeud* Interpreteur::affectation() {
@@ -255,7 +256,7 @@ Noeud* Interpreteur::instLire() {
 
     return new NoeudInstLire(contenu);
     //return nullptr;
-} 
+}
 
 bool Interpreteur::sansErreur() {
     return m_exception.empty();
@@ -263,6 +264,13 @@ bool Interpreteur::sansErreur() {
 
 void Interpreteur::afficherErreur() {
     for (auto e : m_exception) {
-        cout<<e.what()<<endl;
+        cout << e.what() << endl;
     }
+}
+
+void Interpreteur::traduitEnCPP(ostream & cout, unsigned int indentation) const {
+    cout << setw(4 * indentation) << "" << "int main() {" << endl;
+    getArbre()->traduitEnCPP(cout, indentation+1);
+    cout << setw(4 * indentation) << "" << "return 0;" << endl;
+    cout << setw(4 * indentation) << "" << "}" << endl;
 }

@@ -1,12 +1,14 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-  i = 12+3;
+  i = 12+3+4+54;
   j = 0;
   j = 0;
   h=1;
     
   si (i>14)
+    j=1;
+    j=2;
     j=1;
   finsi
 
@@ -17,9 +19,9 @@ procedure principale()
   repeter j=j+1;
   jusqua (j<20)
 
-  #pour (h=1;h<5;h=h+1)
-  #j=j-1;
-  #finpour
+  pour (h=1;h<5;h=h+1)
+  j=j-1;
+  finpour
 
   ecrire("j=",j,"ghhuegbkhtvb",j,"blabla","la",h)
  lire(j , i)

@@ -21,6 +21,7 @@ public:
 	inline Noeud* getArbre () const { return m_arbre; }                    // accesseur
 	bool sansErreur();
         void afficherErreur();
+        void traduitEnCPP(ostream & cout, unsigned int indentation) const;
         
 private:
     Lecteur        m_lecteur;  // Le lecteur de symboles utilisé pour analyser le fichier
@@ -48,6 +49,7 @@ private:
     void tester (const string & symboleAttendu) const throw (SyntaxeException);   // Si symbole courant != symboleAttendu, on lève une exception
     void testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException); // Si symbole courant != symboleAttendu, on lève une exception, sinon on avance
     void erreur (const string & mess) const throw (SyntaxeException);             // Lève une exception "contenant" le message mess
+    
 };
 
 #endif /* INTERPRETEUR_H */
