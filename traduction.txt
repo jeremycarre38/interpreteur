@@ -1,29 +1,13 @@
     int main() {
-        i = 12 + 3 + 4 + 54;
-        j = 0;
-        j = 0;
-        h = 1;
-        if (i > 14) {
+        i = 12 + 2;
+        if (i == 14) {
             j = 1;
-            j = 2;
             j = 1;
         }
 
-        while (j < 5) {
-            j = j + 1;
+        if (i == 14) {
+            j = 1;
         }
-
-        do {
-            j = j + 1;
-        } while (j < 20);
-
-        for (h = 1;h < 5h = h + 1;) {
-            j = j - 1;
-        }
-
-        cout << "j=" << j << "ghhuegbkhtvb" << j << "blabla" << "la" << h
-
-        cin >> j >> i
 
     return 0;
     }

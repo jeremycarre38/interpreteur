@@ -30,11 +30,11 @@ void Interpreteur::tester(const string & symboleAttendu) const throw (SyntaxeExc
 
 void Interpreteur::testerEtAvancer(const string & symboleAttendu) throw (SyntaxeException) {
     // Teste si le symbole courant est égal au symboleAttendu... Si oui, avance, Sinon, lève une exception
-    try {
+    //try {
         tester(symboleAttendu);
-    } catch (SyntaxeException e) {
-        m_exception.push_back(e);
-    }
+    //} catch (SyntaxeException e) {
+    //    m_exception.push_back(e);
+    //}
 
 
     m_lecteur.avancer();
@@ -99,7 +99,7 @@ Noeud* Interpreteur::inst() {
     else if (m_lecteur.getSymbole() == "lire")
         return instLire();
     else cout << "instruction non trouvé";
-    erreur("Instruction incorrecte");
+        //erreur("Instruction incorrecte");
 }
 
 Noeud* Interpreteur::affectation() {
@@ -155,13 +155,54 @@ Noeud* Interpreteur::facteur() {
 
 Noeud* Interpreteur::instSi() {
     // <instSi> ::= si ( <expression> ) <seqInst> finsi
-    testerEtAvancer("si");
-    testerEtAvancer("(");
-    Noeud* condition = expression(); // On mémorise la condition
-    testerEtAvancer(")");
-    Noeud* sequence = seqInst(); // On mémorise la séquence d'instruction
-    testerEtAvancer("finsi");
-    return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
+    Noeud* condition=nullptr;
+    Noeud* sequence=nullptr;
+    try {
+        testerEtAvancer("si");
+    } catch (SyntaxeException se ) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+    
+    try {
+        testerEtAvancer("(");
+    } catch (SyntaxeException se) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+    
+    try {
+        condition = expression(); // On mémorise la condition
+    } catch (SyntaxeException se) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+    try {
+        testerEtAvancer(")");
+    } catch (SyntaxeException se) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+    
+    try {
+        sequence = seqInst(); // On mémorise la séquence d'instruction
+    } catch (SyntaxeException se) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+        
+    try {
+        testerEtAvancer("finsi");
+    } catch (SyntaxeException se) {
+        m_exception.push_back(se);
+        m_lecteur.avancer();
+    }
+    
+    if (sansErreur()) {
+        return new NoeudInstSi(condition, sequence); // Et on renvoie un noeud Instruction Si
+    } else {
+        m_arbre=nullptr;
+    }
 }
 
 Noeud* Interpreteur::instTantQue() {

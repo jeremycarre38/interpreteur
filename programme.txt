@@ -6,13 +6,13 @@ procedure principale()
   j = 0;
   h=1;
     
-  si (i>14)
+  si (i=14)
     j=1;
     j=2;
     j=1;
   finsi
 
-  tantque (j<5) 
+  tantque (j=5) 
     j=j+1;
   fintantque
 
