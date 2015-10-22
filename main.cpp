@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "Interpreteur.h"
 #include "Exceptions.h"
@@ -28,7 +29,14 @@ int main(int argc, char* argv[]) {
         // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
         cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable(); 
         
-        interpreteur.traduitEnCPP(cout,1);
+        //Traduction
+        ofstream fichier("traduction.txt", ios::out | ios::trunc);
+        if(fichier) {
+            interpreteur.traduitEnCPP(fichier,1);
+            fichier.close();  // on ferme le fichier
+        } else  // sinon
+            cout << "Impossible d'ouvrir le fichier !" << endl;
+        
     } else {
         interpreteur.afficherErreur();
     }

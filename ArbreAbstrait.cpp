@@ -85,7 +85,7 @@ int NoeudOperateurBinaire::executer() {
   return valeur; // On retourne la valeur calculée
 }
 
-void NoeudOperateurBinaire::traduitEnCPP(ostream & count, unsigned int indentation) const {
+void NoeudOperateurBinaire::traduitEnCPP(ostream & cout, unsigned int indentation) const {
     cout << "";
     m_operandeGauche->traduitEnCPP(cout,indentation);
     cout << " " << m_operateur.getChaine() << " ";
