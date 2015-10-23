@@ -1,1 +1,12 @@
  
+# Test du ecrire 
+# Résultat attendu : 
+# "j = "5"et j + k = "7
+#8
+
+procedure principale() 
+    j=5;
+    k=2;
+    ecrire ("j = ",j,"et j + k = ",j+k)
+    ecrire(j*k-k)
+finproc

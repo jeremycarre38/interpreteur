@@ -4,13 +4,14 @@
 # test1 = 1 
 # test2 = 1  
 procedure principale() 
-  
+  i = 0;
 test1 = 0 ; 
-  si ( 1 ) 
+  si ( i == 0 ) 
     test1 = 1 ; 
   finsi 
   test2 = 1 ; 
-  si ( 0 ) 
+
+  si ( i==12 ) 
     test2 = 0 ; 
   finsi  
 finproc 

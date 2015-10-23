@@ -1,1 +1,23 @@
- 
+ # Test du Pour 
+# Résultat attendu :
+# h = 5
+# j = 4
+# v = 2
+procedure principale()
+
+    j = 0;
+    v = 0;
+
+    pour (h=1;h<5;(h=h+1))
+        j = j+k;
+    finpour
+
+    pour (h=1;h<5;h=h+1)
+        j = j+1;
+    finpour
+
+    pour (h=1;h<5;h=h+2)
+    v = v+1;
+    finpour
+
+finproc

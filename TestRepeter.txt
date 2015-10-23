@@ -1,1 +1,19 @@
- 
+# Test du Repeter 
+# Résultat attendu :
+# h = 5
+procedure principale()
+
+    a = 0;
+    b = 0; 
+    
+
+    repeter a = a+1;
+    jusqua (a<=5) 
+
+    repeter a == a+3
+    jusqua((a<=11)
+
+    repeter b = b-1;
+    jusqua (b<5)
+
+finproc

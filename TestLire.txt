@@ -1,1 +1,11 @@
- 
+# Test du Lire 
+# Résultat attendu : 
+# Variables stockées dans l'ordre
+
+procedure principale() 
+    j=5;
+    k=2;
+    m=0;
+    
+    lire(j, k, m)
+finproc 
