@@ -1,0 +1,16 @@
+ 
+# Test du si 
+# Résultat attendu : 
+# test1 = 1 
+# test2 = 1  
+procedure principale() 
+  
+test1 = 0 ; 
+  si ( 1 ) 
+    test1 = 1 ; 
+  finsi 
+  test2 = 1 ; 
+  si ( 0 ) 
+    test2 = 0 ; 
+  finsi  
+finproc 

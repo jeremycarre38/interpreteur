@@ -1,0 +1,8 @@
+ # Test du tantque 
+# Résultat attendu : 
+# test1 = 1 
+# test2 = 1  
+procedure principale()
+
+
+test1 = 0 ;

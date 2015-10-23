@@ -37,6 +37,12 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>TestEcrire.txt</itemPath>
+      <itemPath>TestLire.txt</itemPath>
+      <itemPath>TestPour.txt</itemPath>
+      <itemPath>TestRepeter.txt</itemPath>
+      <itemPath>TestSi.txt</itemPath>
+      <itemPath>TestTantque.txt</itemPath>
     </logicalFolder>
     <itemPath>motsCles.txt</itemPath>
     <itemPath>programme.txt</itemPath>

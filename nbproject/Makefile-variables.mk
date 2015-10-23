@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=m3105-tp5
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/m3105-tp5
+CND_ARTIFACT_NAME_Debug=interpreteur
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/interpreteur
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=m3105-tp5.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/m3105-tp5.tar
+CND_PACKAGE_NAME_Debug=interpreteur.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/interpreteur.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=m3105-tp5
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/m3105-tp5
+CND_ARTIFACT_NAME_Release=interpreteur
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/interpreteur
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=m3105-tp5.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/m3105-tp5.tar
+CND_PACKAGE_NAME_Release=interpreteur.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/interpreteur.tar
 #
 # include compiler specific variables
 #
